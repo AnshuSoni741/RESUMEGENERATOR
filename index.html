@@ -1,0 +1,205 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        input,
+        textarea,
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Generate PDF</h2>
+    <input type="text" id="templateType" placeholder="templateType">
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="jobTitle" placeholder="Job title">
+    <input type="text" id="email" placeholder="Email id">
+    <input type="text" id="phone" placeholder="phone">
+    <button onclick="generatePDF()">Generate PDF</button>
+
+    <script>
+        async function generatePDF() {
+            const templateType = document.getElementById('templateType').value;
+            const name = document.getElementById('name').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+
+
+            const response = await fetch('http://localhost:3000/generate-pdf', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ templateType, name, jobTitle, email, phone })
+            });
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+
+        }
+    </script>
+
+</body>
+
+</html>-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANSHUYOLOGY - Resume PDF Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            padding: 20px;
+        }
+
+        .company-header {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #2c3e50;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        input,
+        select,
+        button {
+            width: 90%;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #ff5733;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #c70039;
+            transform: scale(1.05);
+        }
+
+        .image-container {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            opacity: 0.7;
+        }
+
+        .image-container img {
+            width: 120px;
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="company-header"> ANSHUYOLOGY - Resume Creator</div>
+    <div class="image-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Resume Icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png" alt="Profile Icon">
+    </div>
+
+    <div class="container">
+        <h2>Generate Your Resume PDF</h2>
+        <select id="templateType">
+            <option value="template1">Template 1</option>
+            <option value="template2">Template 2</option>
+            <option value="template3">Template 3</option>
+            <option value="template4">Template 4</option>
+        </select>
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="jobTitle" placeholder="Job Title">
+        <input type="email" id="email" placeholder="Email ID">
+        <input type="tel" id="phone" placeholder="Phone">
+        <button onclick="generatePDF()">Generate PDF</button>
+    </div>
+
+    <script>
+        async function generatePDF() {
+            const templateType = document.getElementById('templateType').value;
+            const name = document.getElementById('name').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            const response = await fetch('http://localhost:3000/generate-pdf', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ templateType, name, jobTitle, email, phone })
+            });
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        }
+    </script>
+</body>
+
+</html>
